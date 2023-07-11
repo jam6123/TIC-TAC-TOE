@@ -1,0 +1,157 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+:root {
+    --highlight-winner: aqua;
+}
+
+.title {
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: aqua;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+
+    position: fixed;
+}
+
+.container {
+    background-color: gray;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    place-content: center;
+    grid-template-columns: repeat(3, auto);
+}
+
+.cell {    
+    width: 100px;
+    height: 100px;
+    border: 2px solid rgb(0, 0, 0);
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    position: relative;
+}
+
+.cell.x,
+.cell.circle {
+    cursor: not-allowed;
+}
+
+.container div:nth-child(1),
+.container div:nth-child(2),
+.container div:nth-child(3) {
+    border-top: none;
+}
+
+.container div:nth-child(3n + 1) {      /* this means target every third count and start with first child */
+    border-left: none;
+}
+
+.container div:nth-child(3n + 3) {
+    border-right: none;
+}
+
+.container div:nth-child(1n + 7) {
+    border-bottom: none;
+}
+
+.cell.x::before,
+.cell.x::after,
+.container.x .cell:not(.x):not(.circle):hover::before,
+.container.x .cell:not(.x):not(.circle):hover::after {
+    content: '';
+    display: block;
+    width: 10px;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    border-radius: 100px;
+
+    position: absolute;
+}
+
+.container.x .cell:not(.x):not(.circle):hover::before,
+.container.x .cell:not(.x):not(.circle):hover::after {
+    background-color: rgb(88, 88, 88);
+}
+
+.cell.x::before,
+.container.x .cell:not(.x):not(.circle):hover::before {
+    transform: rotate(45deg);
+}
+
+.cell.x::after,
+.container.x .cell:not(.x):not(.circle):hover::after {
+    transform: rotate(-45deg);
+}
+
+.cell.circle::before,
+.container.circle .cell:not(.x):not(.circle):hover::before {
+    content: '';
+    display: block;
+    width: 80%;
+    height: 80%;
+    border-radius: 100px;
+    border: 10px solid black;
+
+    position: absolute;
+}
+
+.container.circle .cell:not(.x):not(.circle):hover::before {
+    border-color: rgb(88, 88, 88);
+
+}
+
+.message-container {
+    background-color: rgba(0, 0, 0, 0.582);
+    display: none;
+    width: 100vw;
+    place-content: center;
+    
+    position: fixed;
+    inset: 0;
+}
+
+.message {
+    color: white;
+    font-size: 4rem;
+}
+
+button {
+    width: fit-content;
+    font-size: 1.6rem;
+    font-weight: bold;
+    cursor: pointer;
+    justify-self: center;
+    padding: 5px 20px;
+    margin-top: 20px;
+    border-radius: 50px;
+    border: none;
+}
+
+button:hover {
+    background-color: aqua;
+}
+
+button:active {
+    color: rgb(121, 121, 121);
+}
+
+.highlight.x::before,
+.highlight.x::after {
+    background-color: var(--highlight-winner);
+}
+
+.highlight.circle::before {
+    border-color: var(--highlight-winner);
+}
